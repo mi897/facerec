@@ -56,4 +56,6 @@ def face_comp(p1, p2):
 
 
 def path_to_val(path):
+    # Input: all_faces/1/163_318_271_426.jpg
+    # Output: top = 163, right = 318, left = 271, bottom = 426        
     pass
