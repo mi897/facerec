@@ -4,8 +4,6 @@ import cv2
 import shutil
 import os, glob
 
-# https://www.thepythoncorner.com/2018/04/how-to-make-your-code-faster-by-using-a-cache-in-python/?doing_wp_cron=1550052809.3500170707702636718750
-
 '''
 - Get all image paths inside the image sequence directory - done
 - For each image in all image
@@ -20,6 +18,8 @@ import os, glob
     * Number of folders as number of images
     * A folder has number of faces detected from the image
 '''
+# https://www.thepythoncorner.com/2018/04/how-to-make-your-code-faster-by-using-a-cache-in-python/?doing_wp_cron=1550052809.3500170707702636718750
+
 
 # read all paths in directory
 paths_to_images= os.listdir("frames")
@@ -38,7 +38,6 @@ for path in paths_to_images[:10]:
     img = cv2.imread("frames/{}". format(path))
     #dummy = cv2.imread("frames/0.jpg")
     os.makedirs("{}/{}".format(path_main, folder_count))
-
     # get faces locations
     face_locations = face_recognition.face_locations(img)
 

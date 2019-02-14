@@ -4,6 +4,9 @@ import shutil
 import imutils
 import os
 
+'''Script take in a video and saves each frame as an image as a sequence.
+'''
+
 cap = cv2.VideoCapture('vid2.MOV')
 count = 0
 
