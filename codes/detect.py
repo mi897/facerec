@@ -8,7 +8,7 @@ import os, glob
 - Get all image paths inside the image sequence directory - done
 - For each image in all image
     * Load image - done
-    * Make a folder named as image number - done
+    * Make a folder named as image/frame number - done
     * Detect face in image - done
     * Crop face from image - done
     * Rename face as x,y pos - done
@@ -17,9 +17,8 @@ import os, glob
 - Ouptut 
     * Number of folders as number of images
     * A folder has number of faces detected from the image
+    * Extracted face image names are saved as it's location in original image
 '''
-# https://www.thepythoncorner.com/2018/04/how-to-make-your-code-faster-by-using-a-cache-in-python/?doing_wp_cron=1550052809.3500170707702636718750
-
 
 # read all paths in directory
 paths_to_images= os.listdir("frames")

@@ -14,8 +14,24 @@ def similarity_score(x, y):
     return dist
 
 
-def calculateDistance(image1, image2):
-    return np.sqrt(np.sum((image1-image2)**2))
+def mse(image_path_1, image_path_2):
+    image1 = cv2.resize(cv2.imread(image_path_1), (120,120))
+    image2 = cv2.resize(cv2.imread(image_path_2), (120,120))
+    
+    err = np.sum((image1.astype("float") - image2.astype("float")) ** 2)
+    err /= float(image1.shape[0] * image1.shape[1])
+
+    # return the MSE, the lower the error, the more "similar"
+    return err
+
+
+def eucl_dist(image_path_1, image_path_2):
+
+    image1 = cv2.resize(cv2.imread(image_path_1), (120,120))
+    image2 = cv2.resize(cv2.imread(image_path_2), (120,120))
+
+    dist = np.sqrt(np.sum((image1-image2)**2))
+    return dist
 
 
 def hash_sim(path1, path2):
@@ -28,6 +44,7 @@ def hash_sim(path1, path2):
     hash1 = imagehash.average_hash(img_1)
     hash2 = imagehash.average_hash(img_2)
     diff = hash1 - hash2
+    
     return diff
 
 def face_comp(p1, p2):
@@ -56,6 +73,13 @@ def face_comp(p1, p2):
 
 
 def path_to_val(path):
-    # Input: all_faces/1/163_318_271_426.jpg
-    # Output: top = 163, right = 318, left = 271, bottom = 426        
-    pass
+    '''
+    Input: an image path such as -> all_faces/1/163_318_271_426.jpg
+    Output: top = 163, right = 318, left = 271, bottom = 426        
+    '''
+    top = path[12:15]
+    right = path[16:19]
+    left = path[20:23]
+    bottom = path[24:27]
+
+    return (top, right, left, bottom)
