@@ -10,16 +10,24 @@ import helpers
 path_main = "all_faces"
 
 # read images from two folders
-paths_to_images_1= os.listdir("{}/0".format(path_main))[0]
-paths_to_images_2= os.listdir("{}/1".format(path_main))[0]
+fn1 = 1
+fn2 = 2
 
-img_path1 = "{}/0/{}". format(path_main, paths_to_images_1)
-img_path2 = "{}/1/{}". format(path_main, paths_to_images_2)
+paths_to_images_1= os.listdir("{}/{}".format(path_main, fn1))[0]
+paths_to_images_2= os.listdir("{}/{}".format(path_main, fn2))[0]
 
-p1 = "2.jpg"
-p2 = "s.jpg"
+img_path1 = "{}/{}/{}". format(path_main, fn1, paths_to_images_1)
+img_path2 = "{}/{}/{}". format(path_main, fn2, paths_to_images_2)
 
-#(t, r, l, b) = helpers.path_to_val(img_path1)
+print(img_path1, img_path2)
 
-score = helpers.face_comp(p1, p2)
-print(score)
+#p1 = "t.jpg"
+#p2 = "s.jpg"
+#score = helpers.face_comp(p1, p2)
+#print(score)
+
+sim = helpers.similarity_score(img_path1, img_path2)
+print(sim)
+
+# sim in 50 to 100 - same face
+# sim > 100 - diff face

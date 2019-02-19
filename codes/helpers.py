@@ -8,9 +8,21 @@ import imagehash
 
 '''Script name is self explanatory'''
 
-def similarity_score(x, y):
+def similarity_score(img_path1, img_path2):
+
+    loc1 = []
+    loc2 = []
+    
+    loc1.append(path_to_val(img_path1))
+    loc2.append(path_to_val(img_path2))
+
+    loc1 = np.array(loc1[0], dtype="int")
+    loc2 = np.array(loc2[0], dtype="int")
+
     # similarity score in 4-d space
-    dist = np.linalg.norm(x-y)
+    dist = np.linalg.norm(loc1 - loc2)
+    # got 99.9 for similar faces in two frames
+
     return dist
 
 
@@ -77,9 +89,13 @@ def path_to_val(path):
     Input: an image path such as -> all_faces/1/163_318_271_426.jpg
     Output: top = 163, right = 318, left = 271, bottom = 426        
     '''
-    top = path[12:15]
-    right = path[16:19]
-    left = path[20:23]
-    bottom = path[24:27]
+    #import pdb; pdb.set_trace()
+    loc = path[-19:]
+    top = loc[:3]
+    right = loc[4:7]
+    left = loc[8:11]
+    bottom = loc[12:15]
 
-    return (top, right, left, bottom)
+    return top, right, left, bottom
+
+    
