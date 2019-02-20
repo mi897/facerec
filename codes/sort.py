@@ -1,4 +1,13 @@
 import os
+'''
+
+['182.jpg', '164.jpg', '46.jpg', '80.jpg', '212.jpg']
+
+# make tuples for mapping
+[('182.jpg', 182), ('164.jpg', 164), ('46.jpg', 46), ('80.jpg', 80), ('212.jpg', 212)]
+
+[46, 80, 164, 182, 212]
+'''
 
 def quicksort(p_t):
 
@@ -21,19 +30,7 @@ def quicksort(p_t):
                 bigger.append(the_culprit[0])
 
         sorted_arr = quicksort(smaller) + [pivot] + quicksort(bigger)
-        print(sorted_arr)
-
-        for i in sorted_arr:
-            print(i)
-    #print(sorted_arr)
-    #import pdb; pdb.set_trace()
-    #sorted_tuples = []
-    #for elem in sorted_arr:
-     #   val = None
-      #  val = [item for item in p_t if item[1] == elem]
-       # sorted_tuples.append(val)
-
-    return sorted_arr
+        return sorted_arr
 
 # read all paths in directory
 paths_to_images= os.listdir("frames")[:5]
@@ -49,8 +46,16 @@ for p in paths_to_images:
     paths.append(path_tuple) 
 
 
-paths_sorted = quicksort(paths)
+arr_sorted = quicksort(paths)
+paths_sorted = []
 
-print(paths)
-print("\n")
+
+for p in arr_sorted:
+    val = [item for item in paths if item[1] == p]
+    val.append(paths_sorted)
+
 print(paths_sorted)
+
+print(paths_to_images)
+#print("\n")
+#print(arr_sorted)
