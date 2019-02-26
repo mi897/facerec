@@ -98,4 +98,83 @@ def path_to_val(path):
 
     return top, right, left, bottom
 
+
+def get_image_paths(folder, path_main):
+    '''
+    Input: folder - folder number
+            path_main - name of main directory inside which the folder resides
     
+    Returns: all paths of images  
+    '''
+    
+    assert type(folder) is int, "I need integers"
+    assert type(path_main) is str, "I need strings"
+
+    paths_to_images = [path for path in os.listdir("{}/{}".format(path_main, folder))]
+    count = len(paths_to_images)
+    img_paths = []
+
+    for i in range(count): 
+        img_paths.append("{}/{}/{}". format(path_main, folder, paths_to_images[i]))
+    
+    return img_paths
+
+
+def quicksort(p_t):
+    '''Sub function for sorting paths, gets called by sort paths'''
+    arr = [num[1] for num in p_t]
+    if len(arr) < 2:
+        return arr
+    
+    else:
+        pivot = arr[0]
+        pivot_tuple = [item for item in p_t if item[1] == pivot]
+        smaller, bigger = [], []
+        for elem in arr[1:]:
+            if elem <= pivot:
+                the_culprit = [item for item in p_t if item[1] == elem]
+                smaller.append(the_culprit[0])
+            else:
+                the_culprit = [item for item in p_t if item[1] == elem]
+                bigger.append(the_culprit[0])
+
+        sorted_arr = quicksort(smaller) + [pivot] + quicksort(bigger)
+        return sorted_arr
+
+def sort_paths(paths_to_images):
+    '''Stupid function to sort paths in a directory because Python 
+    function by default returns the paths RANDOMLY!
+
+    ['182.jpg', '164.jpg', '46.jpg', '80.jpg', '212.jpg']
+
+    # make tuples for mapping
+    [('182.jpg', 182), ('164.jpg', 164), ('46.jpg', 46), ('80.jpg', 80), ('212.jpg', 212)]
+
+    [46, 80, 164, 182, 212]
+    '''
+    
+    paths = []
+
+    for p in paths_to_images:
+
+        path_tuple = None
+        count = int(p[:-4])
+        path_tuple = (p, count)
+        paths.append(path_tuple) 
+
+    arr_sorted = quicksort(paths)
+
+    paths_sorted = []
+
+    for p in arr_sorted:
+        val = [item for item in paths if item[1] == p]
+        paths_sorted.append(val)
+
+    paths_final = []
+
+    for p in paths_sorted:
+        paths_final.append(p[0][0])
+
+    return paths_final
+
+
