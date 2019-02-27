@@ -41,5 +41,6 @@ face_locations = face_recognition.face_locations(image)
 print("I found {} face(s) in this photograph.".format(len(face_locations)))
 detect_and_extract()
 
+
 # for testing only
 #plot_img(image)
