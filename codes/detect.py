@@ -3,6 +3,7 @@ import face_recognition
 import cv2
 import shutil
 import os, glob
+import helpers
 
 '''
 - Get all image paths inside the image sequence directory - done
@@ -21,7 +22,10 @@ import os, glob
 '''
 
 # read all paths in directory
-paths_to_images= os.listdir("frames")
+paths_to_images= os.listdir("frames")[:]
+
+paths_sorted = helpers.sort_paths(paths_to_images)
+
 
 # main folder which has all folders 
 path_main = "all_faces"
@@ -30,9 +34,8 @@ shutil.rmtree(path_main)
 # make new folder
 os.makedirs(path_main)
 
-
 folder_count = 0
-for path in paths_to_images[:10]:
+for path in paths_sorted:
     # load image
     img = cv2.imread("frames/{}". format(path))
     #dummy = cv2.imread("frames/0.jpg")

@@ -15,13 +15,12 @@ def detect_and_extract():
     for face_location in face_locations:
 
         top, right, bottom, left = face_location
-        print("A face is located at pixel location Top: {}, Left: {}, Bottom: {}, Right: {}".format(top, left, bottom, right))
-
-        face_image = image[top:bottom, left:right]
-        cv2.imwrite("faces/face{}.jpg" .format(count), face_image)
+        #print("A face is located at pixel location Top: {}, Left: {}, Bottom: {}, Right: {}".format(top, left, bottom, right))
+        #face_image = image[top:bottom, left:right]
+        #cv2.imwrite("faces/face{}.jpg" .format(count), face_image)
         count+=1
     print("Done!")
-    cv2.destroyAllWindows()
+    #cv2.destroyAllWindows()
 
 def plot_img(image):
     # For testing
@@ -31,11 +30,12 @@ def plot_img(image):
     plt.show()
 
 
-path_frames = "faces"
-shutil.rmtree(path_frames)
-os.makedirs(path_frames)
+#path_frames = "faces"
+#shutil.rmtree(path_frames)
+#os.makedirs(path_frames)
 
-image = face_recognition.load_image_file("test.jpg")
+number = 49
+image = face_recognition.load_image_file("frames/{}.jpg".format(number))
 face_locations = face_recognition.face_locations(image)
 
 print("I found {} face(s) in this photograph.".format(len(face_locations)))
