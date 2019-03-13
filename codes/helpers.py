@@ -48,8 +48,8 @@ def eucl_dist(image_path_1, image_path_2):
 
 def hash_sim(path1, path2):
     
-    assert type(p1) is str, "I need a string"
-    assert type(p2) is str, "I need a string"
+    assert type(path1) is str, "I need a string"
+    assert type(path2) is str, "I need a string"
 
     img_1 = Image.open(path1)
     img_2 = Image.open(path2)
@@ -120,61 +120,11 @@ def get_image_paths(folder, path_main):
     return img_paths
 
 
-def quicksort(p_t):
-    '''Sub function for sorting paths, gets called by sort paths'''
-    arr = [num[1] for num in p_t]
-    if len(arr) < 2:
-        return arr
-    
-    else:
-        pivot = arr[0]
-        pivot_tuple = [item for item in p_t if item[1] == pivot]
-        smaller, bigger = [], []
-        for elem in arr[1:]:
-            if elem <= pivot:
-                the_culprit = [item for item in p_t if item[1] == elem]
-                smaller.append(the_culprit[0])
-            else:
-                the_culprit = [item for item in p_t if item[1] == elem]
-                bigger.append(the_culprit[0])
+# Helper function to extract the number from the filename
+def get_number(filename):
+    return int(filename[:filename.find('.')])
 
-        sorted_arr = quicksort(smaller) + [pivot] + quicksort(bigger)
-        return sorted_arr
-
-def sort_paths(paths_to_images):
-    '''Stupid function to sort paths in a directory because Python 
-    function by default returns the paths RANDOMLY!
-
-    ['182.jpg', '164.jpg', '46.jpg', '80.jpg', '212.jpg']
-
-    # make tuples for mapping
-    [('182.jpg', 182), ('164.jpg', 164), ('46.jpg', 46), ('80.jpg', 80), ('212.jpg', 212)]
-
-    [46, 80, 164, 182, 212]
-    '''
-    
-    paths = []
-
-    for p in paths_to_images:
-
-        path_tuple = None
-        count = int(p[:-4])
-        path_tuple = (p, count)
-        paths.append(path_tuple) 
-
-    arr_sorted = quicksort(paths)
-
-    paths_sorted = []
-
-    for p in arr_sorted:
-        val = [item for item in paths if item[1] == p]
-        paths_sorted.append(val)
-
-    paths_final = []
-
-    for p in paths_sorted:
-        paths_final.append(p[0][0])
-
-    return paths_final
-
-
+# Sort the array paths using the number returned by the function get_number
+def sort_paths(paths):
+    paths.sort(key = get_number)
+    return paths
